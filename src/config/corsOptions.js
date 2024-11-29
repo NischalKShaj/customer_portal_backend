@@ -1,7 +1,7 @@
 // file for the cors options
 
 export const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: "https://customer-portal-frontend-three.vercel.app",
   methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"],
   allowedHeaders: [
     "Origin",

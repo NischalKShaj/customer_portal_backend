@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 connection();
 
 // for creating the fake data
-// insertBulkData(5000);
+insertBulkData(5000);
 
 // setting the route
 app.get("/test", (req, res) => {
@@ -34,6 +34,15 @@ app.get("/test", (req, res) => {
 // setting the up the main routes
 app.use("/customer", customerRoute);
 
+// error handling middleware
+app.use((err, req, res, next) => {
+  console.log("error", err.stack);
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "internal server error";
+  res.status(statusCode).json({ success: false, message: message });
+});
+
+// setting the port number
 const port = process.env.PORT;
 
 // starting the server

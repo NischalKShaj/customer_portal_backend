@@ -25,6 +25,7 @@ export const customerController = {
         ];
       }
 
+      // for age based filtering
       if (age) {
         const [minAge, maxAge] = age.split("-").map(Number);
         const currentDate = new Date();
@@ -53,6 +54,7 @@ export const customerController = {
         query.dob = maxAge ? { $gte: minDate, $lt: maxDate } : { $lt: maxDate };
       }
 
+      // for getting the data
       const customers = await customer
         .find(query)
         .sort({ name: 1 })
@@ -66,6 +68,7 @@ export const customerController = {
       res.status(200).json({ data: customers });
     } catch (error) {
       console.error("error", error);
+      throw new Error(error);
     }
   },
 };
